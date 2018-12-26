@@ -20,6 +20,7 @@ import com.google.cloud.hadoop.util.EntriesCredentialConfiguration;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
@@ -52,8 +53,7 @@ public class CloudPubSubStreamingWordCount {
         "tweets-subscription", // Cloud PubSub subscription
         new SparkGCPCredentials.Builder().build(),
         StorageLevel.MEMORY_AND_DISK_SER());
-
-      pubSubStream.map(SparkPubsubMessage::getData).print();
+    pubSubStream.map(msg ->  new String(msg.getData(), StandardCharsets.UTF_8));
 
     try {
       jsc.start();
