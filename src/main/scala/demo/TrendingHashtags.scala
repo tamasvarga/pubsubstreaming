@@ -48,7 +48,7 @@ object TrendingHashtags {
         "tweets-subscription",  // Cloud Pub/Sub subscription for incoming tweets
         SparkGCPCredentials.builder.build(), StorageLevel.MEMORY_AND_DISK_SER_2)
       .map(message => new String(message.getData(), StandardCharsets.UTF_8))
-      .foreachRDD(s=>println(s))
+      .foreachRDD(srdd=>srdd.foreach(s=>print(s)))
     // [END stream_setup]
 
 ssc
