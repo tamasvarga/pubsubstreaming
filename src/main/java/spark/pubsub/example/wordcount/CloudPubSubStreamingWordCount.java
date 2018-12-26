@@ -53,7 +53,8 @@ public class CloudPubSubStreamingWordCount {
         "tweets-subscription", // Cloud PubSub subscription
         new SparkGCPCredentials.Builder().build(),
         StorageLevel.MEMORY_AND_DISK_SER());
-    pubSubStream.map(msg ->  new String(msg.getData(), StandardCharsets.UTF_8));
+
+      pubSubStream.map(msg ->  new String(msg.getData(), StandardCharsets.UTF_8)).print();
 
     try {
       jsc.start();
