@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spark-streaming-pubsub-demo" />
+        <module name="pubsub-streaming" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="spark-streaming-pubsub-demo" target="1.8" />
+      <module name="pubsub-streaming" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
