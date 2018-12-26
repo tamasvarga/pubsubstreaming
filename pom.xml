@@ -72,25 +72,30 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.1.1</version>
         <executions>
           <execution>
-            <id>pubsub-streaming-wordcount</id>
             <phase>package</phase>
             <goals>
-              <goal>single</goal>
+              <goal>shade</goal>
             </goals>
             <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>
-                    spark.pubsub.example.wordcount.CloudPubSubStreamingWordCount
-                  </mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>spark.pubsub.example.wordcount.CloudPubSubStreamingWordCount</mainClass>
+                </transformer>
+              </transformers>
+              <relocations>
+                <relocation>
+                  <pattern>com</pattern>
+                  <shadedPattern>repackaged.com</shadedPattern>
+                  <includes>
+                    <include>com.google.protobuf.**</include>
+                    <include>com.google.common.**</include>
+                  </includes>
+                </relocation>
+              </relocations>
             </configuration>
           </execution>
         </executions>
