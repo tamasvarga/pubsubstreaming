@@ -19,6 +19,7 @@ import Tools.RuleExecutor;
 import org.apache.spark.SparkConf;
 import org.apache.spark.storage.StorageLevel;
 import org.apache.spark.streaming.Milliseconds;
+import org.apache.spark.streaming.Seconds;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
@@ -33,7 +34,7 @@ public class EventStreaming {
     public static void main(String[] args) throws InterruptedException {
         JavaStreamingContext jsc = new JavaStreamingContext(
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
-                Milliseconds.apply(500) // Batch duration
+                Seconds.apply(1000) // Batch duration
         );
 
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
@@ -47,7 +48,7 @@ public class EventStreaming {
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
 
         pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).print();
-        
+
         try {
             jsc.start();
             // Let the job run for the given duration and then terminate it.
