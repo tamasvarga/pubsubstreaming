@@ -12,6 +12,7 @@
     <groupId>grape</groupId>
     <artifactId>event-streaming</artifactId>
     <version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -60,7 +61,15 @@
             <version>23.0</version>
         </dependency>
 
-        <dependency>
+        <!-- https://mvnrepository.com/artifact/org.kie/kie-api -->
+	<dependency>
+		<groupId>org.kie</groupId>
+		<artifactId>kie-api</artifactId>
+		<version>7.15.0.Final</version>
+	</dependency>
+
+		
+		<dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>
             <version>7.15.0.Final</version>
