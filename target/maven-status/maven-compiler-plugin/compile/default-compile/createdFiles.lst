@@ -1,6 +1,6 @@
+EventStreaming.class
 Tools\DataStoreConnector.class
 Tools\Event.class
-KieFactory.class
 Tools\KieFactory.class
 Tools\ActionActivator.class
-CloudPubSubStreamingWordCount.class
+Tools\RuleExecutor.class
