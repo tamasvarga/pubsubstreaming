@@ -43,11 +43,7 @@ public class EventStreaming {
 
 //        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
-        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).foreachRDD(rdd->{
-            rdd.foreach(msg->{
-               System.out.println("Reached RDD");
-            });
-        });
+        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).print();
 
         try {
             jsc.start();
