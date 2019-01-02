@@ -40,7 +40,7 @@ public class EventStreaming {
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
                 jsc,
                 "nkm-rtd", // GCP project ID
-                "tweets-subscription", // Cloud PubSub subscription
+                "tweets-subscription2", // Cloud PubSub subscription
                 new SparkGCPCredentials.Builder().build(),
                 StorageLevel.MEMORY_AND_DISK_SER());
 
