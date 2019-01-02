@@ -43,9 +43,11 @@ public class EventStreaming {
 
 //        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
-        DataStoreConnector connector= new DataStoreConnector();
         pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).foreachRDD(rdd->{
-            rdd.foreach(connector::Dump);
+            rdd.foreach(msg->{
+                DataStoreConnector connector= new DataStoreConnector();
+                connector.Dump(msg);
+            });
         });
 
         try {
