@@ -51,11 +51,12 @@ public class EventStreaming {
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)
                 .filter(Objects::nonNull)
-                .foreachRDD(rdd->
-                        {
-                            rdd.foreach(event -> event.AddAction("Demo Action"));
-                            rdd.collect().forEach(event -> System.out.println(event.GetActions()));
-                        }
+                .map(e -> {
+                    e.AddAction("Demo action");
+                    return e;
+                })
+                .foreachRDD(rdd ->
+                        rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions?"))
 
                 );
 
