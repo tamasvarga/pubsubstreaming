@@ -144,6 +144,11 @@
         <version>6.0.0.CR5</version>
         <extensions>true</extensions>
       </plugin>
+	  <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
 	  
 </plugins>	
 	</build>
