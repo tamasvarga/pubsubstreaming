@@ -20,6 +20,9 @@
                 <transformer>
                   <resource>META-INF/kie.conf</resource>
                 </transformer>
+                <transformer>
+                  <mainClass>EventStreaming</mainClass>
+                </transformer>
               </transformers>
             </configuration>
           </execution>

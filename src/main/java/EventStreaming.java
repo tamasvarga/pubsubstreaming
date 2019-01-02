@@ -43,9 +43,11 @@ public class EventStreaming {
                 new SparkGCPCredentials.Builder().build(),
                 StorageLevel.MEMORY_AND_DISK_SER());
 
-        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
-        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
+//        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
+//        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
 
+        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).print();
+        
         try {
             jsc.start();
             // Let the job run for the given duration and then terminate it.
