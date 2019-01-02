@@ -14,7 +14,7 @@ public class KieFactory {
     public static StatelessKieSession getNewKieSession(String drlFileName) {
         System.out.println("creating a new kie session");
 
-        KieServices kieServices = KieServices.Factory.ge    t();
+        KieServices kieServices = KieServices.Factory.get();
         KieResources kieResources = kieServices.getResources();
 
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
