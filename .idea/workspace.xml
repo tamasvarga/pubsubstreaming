@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0442f518-46e8-41b5-b8db-a58e6e6f1945" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EventStreaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EventStreaming.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/EventStreaming.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="57" column="34" lean-forward="true" selection-start-line="57" selection-start-column="34" selection-end-line="57" selection-end-column="34" />
+            <state relative-caret-position="439">
+              <caret line="58" column="132" selection-start-line="58" selection-start-column="132" selection-end-line="58" selection-end-column="132" />
               <folding>
                 <element signature="e#0#2271#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -199,7 +198,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546473106745" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546473490713" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -551,8 +550,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/EventStreaming.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="57" column="34" lean-forward="true" selection-start-line="57" selection-start-column="34" selection-end-line="57" selection-end-column="34" />
+        <state relative-caret-position="439">
+          <caret line="58" column="132" selection-start-line="58" selection-start-column="132" selection-end-line="58" selection-end-column="132" />
           <folding>
             <element signature="e#0#2271#0" expanded="true" />
             <element signature="imports" expanded="true" />

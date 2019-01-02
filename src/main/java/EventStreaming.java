@@ -56,7 +56,7 @@ public class EventStreaming {
                     return e;
                 })
                 .foreachRDD(rdd ->
-                        rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions?"))
+                        rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()))
 
                 );
 
