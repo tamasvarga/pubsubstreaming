@@ -111,7 +111,7 @@
 	<plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.1.1</version>	
         <executions>
           <execution>
             <phase>package</phase>
@@ -140,6 +140,12 @@
       </plugin>
 </plugins>	
 	</build>
+	
+	 <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
     
 
 
