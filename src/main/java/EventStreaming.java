@@ -44,7 +44,8 @@ public class EventStreaming {
 
 //        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
-        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).print();
+        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
+                .foreachRDD(rdd->rdd.filter(v1 -> v1!=null && v1!="" ).collect().forEach(System.out::println));
 
         try {
             jsc.start();
