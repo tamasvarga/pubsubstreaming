@@ -28,4 +28,14 @@ public class DataStoreConnector {
 
         return new JSONObject(jsonString).getString(datakey);
     }
+
+    public String Dump(String msg) {
+        KeyFactory keyFactory = datastore.newKeyFactory().setKind("Dump");
+        IncompleteKey key = keyFactory.newKey();
+        FullEntity<IncompleteKey> incBookEntity = Entity.newBuilder(key)  // Create the Entity
+                .set("msg", msg)           // Add Property ("author", book.getAuthor())
+                .build();
+        Entity bookEntity = datastore.add(incBookEntity); // Save the Entity
+        return bookEntity.getKey().getName();
+    }
 }

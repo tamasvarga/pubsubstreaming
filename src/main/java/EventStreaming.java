@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import Tools.DataStoreConnector;
 import org.apache.spark.SparkConf;
 import org.apache.spark.storage.StorageLevel;
 import org.apache.spark.streaming.Seconds;
@@ -42,8 +43,10 @@ public class EventStreaming {
 
 //        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
-
-        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).print();
+        DataStoreConnector connector= new DataStoreConnector();
+        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).foreachRDD(rdd->{
+            rdd.foreach(connector::Dump);
+        });
 
         try {
             jsc.start();
