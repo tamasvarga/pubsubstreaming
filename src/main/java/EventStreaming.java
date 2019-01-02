@@ -33,7 +33,7 @@ public class EventStreaming {
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
                 Seconds.apply(30) // Batch duration
         );
-
+        jsc.sparkContext().setLogLevel("ERROR");
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
                 jsc,
                 "nkm-rtd", // GCP project ID
