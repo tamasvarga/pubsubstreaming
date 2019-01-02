@@ -1,0 +1,9 @@
+import Tools.Event;
+global Tools.ActionActivator activator;
+
+rule "Hello World"
+when
+  event:Event (type == 'Purchase')
+then
+  activator.SendEmail("Welcome",event);
+end
