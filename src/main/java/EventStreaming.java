@@ -17,6 +17,7 @@
 import Tools.DataStoreConnector;
 import org.apache.spark.SparkConf;
 import org.apache.spark.storage.StorageLevel;
+import org.apache.spark.streaming.Milliseconds;
 import org.apache.spark.streaming.Seconds;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
@@ -31,7 +32,7 @@ public class EventStreaming {
     public static void main(String[] args) throws InterruptedException {
         JavaStreamingContext jsc = new JavaStreamingContext(
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
-                Seconds.apply(30) // Batch duration
+                Milliseconds.apply(100) // Batch duration
         );
         jsc.sparkContext().setLogLevel("ERROR");
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
