@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-import Tools.Event;
-import Tools.RuleExecutor;
 import org.apache.spark.SparkConf;
 import org.apache.spark.storage.StorageLevel;
-import org.apache.spark.streaming.Milliseconds;
 import org.apache.spark.streaming.Seconds;
-import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.pubsub.PubsubUtils;
@@ -34,7 +30,7 @@ public class EventStreaming {
     public static void main(String[] args) throws InterruptedException {
         JavaStreamingContext jsc = new JavaStreamingContext(
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
-                Seconds.apply(1000) // Batch duration
+                Seconds.apply(30) // Batch duration
         );
 
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
