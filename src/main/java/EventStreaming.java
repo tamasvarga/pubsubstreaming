@@ -45,8 +45,7 @@ public class EventStreaming {
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
         pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8)).foreachRDD(rdd->{
             rdd.foreach(msg->{
-                DataStoreConnector connector= new DataStoreConnector();
-                connector.Dump(msg);
+               System.out.println("Reached RDD");
             });
         });
 
