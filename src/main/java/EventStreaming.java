@@ -46,7 +46,7 @@ public class EventStreaming {
                 StorageLevel.MEMORY_AND_DISK_SER());
 
 //        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
-//        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
+//        map.mapPartitions(RuleExecutor::Evulate).map(Eve  nt::GetActions).print();
         pubSubStream
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)

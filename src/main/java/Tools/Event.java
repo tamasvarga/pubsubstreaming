@@ -3,10 +3,11 @@ package Tools;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Event {
+public class Event implements Serializable {
 
     private String type;
     private StringBuilder appliedActions= new StringBuilder();
