@@ -15,6 +15,8 @@
  */
 
 import Tools.DataStoreConnector;
+import Tools.Event;
+import Tools.EventFactory;
 import org.apache.spark.SparkConf;
 import org.apache.spark.storage.StorageLevel;
 import org.apache.spark.streaming.Milliseconds;
@@ -26,13 +28,14 @@ import org.apache.spark.streaming.pubsub.SparkGCPCredentials;
 import org.apache.spark.streaming.pubsub.SparkPubsubMessage;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class EventStreaming {
 
     public static void main(String[] args) throws InterruptedException {
         JavaStreamingContext jsc = new JavaStreamingContext(
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
-                Milliseconds.apply(100) // Batch duration
+                Seconds.apply(1) // Batch duration
         );
         jsc.sparkContext().setLogLevel("ERROR");
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
@@ -44,8 +47,17 @@ public class EventStreaming {
 
 //        JavaDStream<Event> map = pubSubStream.map(msg -> new Event(new String(msg.getData(), StandardCharsets.UTF_8)));
 //        map.mapPartitions(RuleExecutor::Evulate).map(Event::GetActions).print();
-        pubSubStream.map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
-                .foreachRDD(rdd->rdd.filter(v1 -> v1!=null && v1!="" ).collect().forEach(System.out::println));
+        pubSubStream
+                .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
+                .map(EventFactory::Create)
+                .filter(Objects::nonNull)
+                .foreachRDD(rdd->
+                        {
+                            rdd.foreach(event -> event.AddAction("Demo Action"));
+                            rdd.collect().forEach(event -> System.out.println(event.GetActions()));
+                        }
+
+                );
 
         try {
             jsc.start();
