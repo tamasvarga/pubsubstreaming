@@ -3,7 +3,9 @@ package Tools;
 import com.google.cloud.datastore.*;
 import org.json.JSONObject;
 
-public class DataStoreConnector {
+import java.io.Serializable;
+
+public class DataStoreConnector implements Serializable {
     private final Datastore datastore;
 
     public DataStoreConnector() {
