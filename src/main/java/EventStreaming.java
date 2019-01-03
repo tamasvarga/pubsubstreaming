@@ -34,11 +34,13 @@ import java.util.Objects;
 public class EventStreaming {
 
     public static void main(String[] args) throws InterruptedException {
+
         JavaStreamingContext jsc = new JavaStreamingContext(
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
                 Seconds.apply(1) // Batch duration
         );
-        jsc.sparkContext().setLogLevel("ERROR");
+
+
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
                 jsc,
                 "nkm-rtd", // GCP project ID
@@ -57,7 +59,11 @@ public class EventStreaming {
                     return e;
                 })
                 .foreachRDD(rdd ->
-                        rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()))
+
+                        {
+                            new DataStoreConnector().SaveEventDecision("Almafa", "Decision");
+                            rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()));
+                        }
 
                 );
 
