@@ -34,17 +34,15 @@ import java.util.Objects;
 public class EventStreaming {
 
     public static void main(String[] args) throws InterruptedException {
-
         JavaStreamingContext jsc = new JavaStreamingContext(
                 new SparkConf().setAppName("Cloud PubSub Spark Streaming Word Count"),
                 Seconds.apply(1) // Batch duration
         );
-
-
+        jsc.sparkContext().setLogLevel("ERROR");
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
                 jsc,
                 "nkm-rtd", // GCP project ID
-                "tweets-subscription2", // Cloud PubSub subscription
+                "tweets-subscription    ", // Cloud PubSub subscription
                 new SparkGCPCredentials.Builder().build(),
                 StorageLevel.MEMORY_AND_DISK_SER());
 
@@ -54,8 +52,13 @@ public class EventStreaming {
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)
                 .filter(Objects::nonNull)
+                .mapPartitions(e -> {
+                    RuleExecutor.Evulate(e);
+                    return e;
+                })
                 .foreachRDD(rdd ->
                         rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()))
+
                 );
 
         try {
