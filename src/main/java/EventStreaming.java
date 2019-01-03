@@ -50,11 +50,11 @@ public class EventStreaming {
 //        map.mapPartitions(RuleExecutor::Evulate).map(Eve  nt::GetActions).print();
         pubSubStream
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
-                .foreachRDD(rdd ->
-                                rdd.collect().forEach(event -> System.out.println("Here we go:" + event))
-                );
-                /*.map(EventFactory::Create)
+                .map(EventFactory::Create)
                 .filter(Objects::nonNull)
+                .foreachRDD(rdd ->
+                        rdd.collect().forEach(event -> System.out.println("Here we go:" + event.getType()))
+                );            /*
                 .mapPartitions(e -> {
                     RuleExecutor.Evulate(e);
                     return e;
