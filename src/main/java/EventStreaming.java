@@ -54,13 +54,8 @@ public class EventStreaming {
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)
                 .filter(Objects::nonNull)
-                
                 .foreachRDD(rdd ->
-
-                        {
-                            rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()));
-                        }
-
+                        rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()))
                 );
 
         try {
