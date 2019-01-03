@@ -61,7 +61,6 @@ public class EventStreaming {
                 .foreachRDD(rdd ->
 
                         {
-                            new DataStoreConnector().SaveEventDecision("Almafa", "Decision");
                             rdd.collect().forEach(event -> System.out.println("We have an event. Type: " + event.getType() + " Actions: " + event.GetActions()));
                         }
 
