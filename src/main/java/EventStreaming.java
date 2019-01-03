@@ -52,7 +52,7 @@ public class EventStreaming {
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)
                 .filter(Objects::nonNull)
-                .mapPartitions(e -> {
+                .map(e -> {
                     RuleExecutor.Evulate(e);
                     return e;
                 })

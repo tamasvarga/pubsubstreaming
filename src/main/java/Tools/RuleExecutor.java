@@ -13,4 +13,11 @@ public class RuleExecutor implements Serializable {
         events.forEachRemaining(kieSession::execute);
 
     }
+
+    public static void Evulate(Event e) {
+        StatelessKieSession kieSession = KieFactory.getNewKieSession("rules.drl");
+        kieSession.setGlobal("activator",new ActionActivator());
+        kieSession.execute(e);
+
+    }
 }
