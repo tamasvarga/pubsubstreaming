@@ -20,7 +20,7 @@ public class KieFactory {
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         KieRepository kieRepository = kieServices.getRepository();
 
-        Resource resource = kieResources.newClassPathResource(drlFileName);
+        Resource resource = kieResources.newUrlResource("https://storage.googleapis.com/rtdpublick/rules.drl");
         kieFileSystem.write(resource);
 
         KieBuilder kb = kieServices.newKieBuilder(kieFileSystem);
