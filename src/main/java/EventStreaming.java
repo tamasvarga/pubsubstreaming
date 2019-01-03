@@ -17,6 +17,7 @@
 import Tools.DataStoreConnector;
 import Tools.Event;
 import Tools.EventFactory;
+import Tools.RuleExecutor;
 import org.apache.spark.SparkConf;
 import org.apache.spark.storage.StorageLevel;
 import org.apache.spark.streaming.Milliseconds;
@@ -51,8 +52,8 @@ public class EventStreaming {
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)
                 .filter(Objects::nonNull)
-                .map(e -> {
-                    e.AddAction("Demo action");
+                .mapPartitions(e -> {
+                    RuleExecutor.Evulate(e);
                     return e;
                 })
                 .foreachRDD(rdd ->
