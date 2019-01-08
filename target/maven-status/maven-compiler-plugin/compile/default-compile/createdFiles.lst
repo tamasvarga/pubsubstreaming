@@ -1,4 +1,5 @@
 EventStreaming.class
+Tools\EventFactory.class
 Tools\DataStoreConnector.class
 Tools\Event.class
 Tools\KieFactory.class
