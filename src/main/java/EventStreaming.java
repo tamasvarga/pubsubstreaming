@@ -42,7 +42,7 @@ public class EventStreaming {
         JavaReceiverInputDStream<SparkPubsubMessage> pubSubStream = PubsubUtils.createStream(
                 jsc,
                 "nkm-rtd", // GCP project ID
-                "tweets-subscription", // Cloud PubSub subscription
+                "events-subscription", // Cloud PubSub subscription
                 new SparkGCPCredentials.Builder().build(),
                 StorageLevel.MEMORY_AND_DISK_SER());
 
@@ -52,7 +52,7 @@ public class EventStreaming {
                 .map(msg -> new String(msg.getData(), StandardCharsets.UTF_8))
                 .map(EventFactory::Create)
                 .filter(Objects::nonNull)
-                .map(e -> {
+                .map -> {
                     RuleExecutor.Evulate(e);
                     return e;
                 })
